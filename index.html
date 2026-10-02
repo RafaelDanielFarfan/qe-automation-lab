@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>QA Automation Lab</title>
+<meta name="description" content="Ruta intensiva de preparación para entrevistas de Senior Test Automation: Playwright, TypeScript, Java + Selenium, Python + Pytest, con compiladores en el navegador.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f5fd1'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='13' font-weight='700' fill='white' text-anchor='middle'%3EQA%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<script>try{var t=localStorage.getItem("qa-lab-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="dot">QA</span>Automation Lab</div>
+    <nav class="tabs" aria-label="Secciones" data-en-aria="Sections">
+      <button data-view="home" aria-current="page" data-en="Home">Inicio</button>
+      <button data-view="route" data-en="Path">Ruta</button>
+      <button data-view="lab" data-en="Lab">Laboratorio</button>
+      <button data-view="interview" data-en="Interview">Entrevista</button>
+    </nav>
+    <span class="spacer"></span>
+    <div class="theme-switch lang-switch" role="group" aria-label="Idioma" data-en-aria="Language">
+      <button type="button" data-lang-set="es" aria-pressed="true" title="Español">ES</button>
+      <button type="button" data-lang-set="en" aria-pressed="false" title="English">EN</button>
+    </div>
+    <div class="theme-switch" role="group" aria-label="Tema" data-en-aria="Theme">
+      <button type="button" data-theme-set="light" aria-pressed="false"><span aria-hidden="true">☀</span><span data-en="Light">Claro</span></button>
+      <button type="button" data-theme-set="dark" aria-pressed="false"><span aria-hidden="true">☾</span><span data-en="Dark">Oscuro</span></button>
+    </div>
+    <span class="pill acc" id="topProgress">0% completado</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- HOME -->
+  <section class="view" id="view-home">
+    <div class="hero">
+      <div>
+        <span class="pill acc">Senior Test Automation</span>
+        <h1 style="margin-top:12px" data-en="From concept to interview, writing code every day.">Del concepto a la entrevista, escribiendo código cada día.</h1>
+        <p class="lead" id="lede">Ruta intensiva en 9 fases. Cada tema sigue el mismo ciclo: concepto, ejemplo, ejercicio con compilador en el navegador, pregunta de entrevista y corrección. JavaScript, TypeScript y Python se ejecutan aquí mismo con tests automáticos; Java se evalúa con Claude actuando como compilador y entrevistador.</p>
+        <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap">
+          <button class="btn primary" data-go="lab" data-en="Keep practicing">Continuar practicando</button>
+          <button class="btn" data-go="route" data-en="See the path">Ver la ruta</button>
+          <button class="btn" data-go="interview" data-en="Mock interview">Simular entrevista</button>
+        </div>
+        <div class="stats">
+          <div class="stat"><b id="stTopics">0/0</b><span data-en="Topics mastered">Temas dominados</span><div class="bar"><i id="barTopics" style="width:0"></i></div></div>
+          <div class="stat"><b id="stEx">0/0</b><span data-en="Exercises solved">Ejercicios resueltos</span><div class="bar"><i id="barEx" style="width:0"></i></div></div>
+          <div class="stat"><b id="stQ">0/0</b><span data-en="Questions practiced">Preguntas practicadas</span><div class="bar"><i id="barQ" style="width:0"></i></div></div>
+        </div>
+        <div class="progress-tools" id="progressTools"></div>
+      </div>
+      <aside class="req">
+        <h3 data-en="What the job asks for">Lo que pide la oferta</h3>
+        <ul id="reqList"></ul>
+        <p class="note" style="margin-top:12px" data-en="Coverage grows as you check topics and solve exercises in each block.">La cobertura sube a medida que marcas temas y resuelves ejercicios de cada bloque.</p>
+      </aside>
+    </div>
+
+    <div class="section-title"><h2 data-en="How each topic is studied">Cómo se estudia cada tema</h2><p data-en="The same cycle in every phase">El mismo ciclo en todas las fases</p></div>
+    <div class="method">
+      <div><b>01</b><span data-en="Concept">Concepto</span></div><div><b>02</b><span data-en="Example">Ejemplo</span></div><div><b>03</b><span data-en="Exercise">Ejercicio</span></div><div><b>04</b><span data-en="Interview question">Pregunta de entrevista</span></div><div><b>05</b><span data-en="Correction">Corrección</span></div><div><b>06</b><span data-en="Next concept">Siguiente concepto</span></div>
+    </div>
+
+    <div class="section-title"><h2 data-en="What I added to your plan">Lo que añadí a tu plan</h2><p data-en="Frequent gaps in senior QA Automation interviews">Gaps frecuentes en entrevistas senior de QA Automation</p></div>
+    <div class="gaps" id="gapList"></div>
+  </section>
+
+  <!-- ROUTE -->
+  <section class="view" id="view-route" hidden>
+    <div class="section-title" style="margin-top:0"><div><h2 data-en="Study path">Ruta de estudio</h2><p data-en="Recommended order: Coding → Playwright → TypeScript → Framework → Selenium/Java → Python/Pytest → CI/CD → Senior scenarios → Mock interview">Orden recomendado: Coding → Playwright → TypeScript → Framework → Selenium/Java → Python/Pytest → CI/CD → Escenarios senior → Mock interview</p></div></div>
+    <div class="phases" id="phaseList"></div>
+  </section>
+
+  <!-- LAB -->
+  <section class="view" id="view-lab" hidden>
+    <div class="lab">
+      <aside class="sidebar" aria-label="Ejercicios" data-en-aria="Exercises">
+        <div class="filters" id="exFilters"></div>
+        <div id="exList"></div>
+      </aside>
+      <div class="workspace">
+        <div class="card" id="exCard"></div>
+        <div class="editor">
+          <div class="langbar" id="langBar"></div>
+          <div class="ed-body" id="edBody"><div class="gutter" id="gutter">1</div><textarea class="code" id="code" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Editor de código" data-en-aria="Code editor"></textarea></div>
+          <div class="ed-tips" id="edTips" hidden><span><span class="kbd" data-en="Ctrl+Space">Ctrl+Espacio</span> <span data-en="suggestions">sugerencias</span></span><span><span class="kbd">Ctrl+/</span> <span data-en="comment">comentar</span></span><span><span class="kbd">Tab</span> <span data-en="indent">indentar</span></span><span><span class="kbd">Ctrl+Enter</span> <span data-en="run">ejecutar</span></span></div>
+          <div class="ed-actions">
+            <button class="btn primary" id="runBtn">▶ Ejecutar tests <span class="kbd">Ctrl+Enter</span></button>
+            <button class="btn" id="reviewBtn" data-en="Review with Claude">Revisar con Claude</button>
+            <button class="btn ghost" id="resetBtn" data-en="Restore template">Restaurar plantilla</button>
+            <button class="btn ghost" id="doneBtn">Marcar como resuelto</button>
+          </div>
+        </div>
+        <div class="card report" id="report">
+          <div class="report-head"><h3 data-en="Result">Resultado</h3><span class="pill" id="repPill">Sin ejecutar</span></div>
+          <div class="tests" id="testRows"></div>
+          <pre class="console" id="consoleOut"></pre>
+          <div id="aiOut"></div>
+        </div>
+      </div>
+      <aside class="tutor" id="tutor" aria-label="Tutor IA" data-en-aria="AI Tutor">
+        <div class="tutor-head">
+          <div><h3 data-en="AI Tutor">Tutor IA</h3><span class="note" id="tutorProvider"></span></div>
+          <div class="tutor-head-actions">
+            <button class="btn ghost" id="tutorNew" title="Nueva conversación" data-en-title="New conversation" data-en="New">Nueva</button>
+            <button class="btn ghost" id="tutorSettingsBtn" hidden>Configurar</button>
+            <button class="btn ghost" id="tutorHide" aria-label="Ocultar tutor" data-en-aria="Hide tutor">✕</button>
+          </div>
+        </div>
+        <div class="tutor-setup" id="tutorSetup" hidden></div>
+        <div class="tutor-msgs" id="tutorMsgs" aria-live="polite"></div>
+        <div class="tutor-chips" id="tutorChips"></div>
+        <div class="tutor-input">
+          <textarea id="tutorIn" placeholder="Pregunta sobre este ejercicio…" aria-label="Pregunta para el tutor" data-en-ph="Ask about this exercise…" data-en-aria="Question for the tutor"></textarea>
+          <button class="btn primary" id="tutorSend" data-en="Send">Enviar</button>
+        </div>
+        <p class="note" id="tutorNote"></p>
+      </aside>
+    </div>
+    <button class="btn primary tutor-fab" id="tutorShow" hidden data-en="💬 AI Tutor">💬 Tutor IA</button>
+  </section>
+
+  <!-- INTERVIEW -->
+  <section class="view" id="view-interview" hidden>
+    <div class="section-title" style="margin-top:0"><div><h2 data-en="Interview">Entrevista</h2><p data-en="Question bank with model key points and feedback, plus a full mock interview in English">Banco de preguntas con respuesta modelo y feedback, más una simulación completa en inglés</p></div>
+      <select id="qFilter" aria-label="Filtrar preguntas" data-en-aria="Filter questions"></select>
+    </div>
+    <div class="iv-layout">
+      <div class="qlist" id="qList"></div>
+      <div class="chat" id="chat">
+        <div><h3 id="mockTitle">Simulacro</h3><p class="note" id="mockDesc" style="margin-top:4px"></p></div>
+        <div class="rounds" id="rounds"></div>
+        <div class="msgs" id="msgs"></div>
+        <textarea id="chatIn" placeholder="Tu respuesta en inglés…" aria-label="Tu respuesta" data-en-ph="Your answer in English…" data-en-aria="Your answer"></textarea>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn primary" id="chatStart">Empezar entrevista</button>
+          <button class="btn" id="chatSend" disabled>Enviar respuesta</button>
+          <button class="btn ghost" id="chatSummary" disabled data-en="Ask for final evaluation">Pedir evaluación final</button>
+        </div>
+        <p class="note" id="chatNote"></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/clike/clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/hint/show-hint.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchbrackets.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/selection/active-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/comment/comment.min.js"></script>
+<script src="js/data/plan.js"></script>
+<script src="js/data/exercises.js"></script>
+<script src="js/data/questions.js"></script>
+<script src="js/data/hints.js"></script>
+<script src="js/data/en.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
